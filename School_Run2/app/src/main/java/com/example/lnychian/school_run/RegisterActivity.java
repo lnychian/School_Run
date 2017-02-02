@@ -2,9 +2,7 @@ package com.example.lnychian.school_run;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.ActivityOptions;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -77,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void done(MyUser s, BmobException e) {
                         if(e==null){
-                            Intent i2 = new Intent(RegisterActivity.this,LoginSuccessActivity.class);
+                            Intent i2 = new Intent(RegisterActivity.this,MainActivity.class);
                             startActivity(i2);
                             finish();
                             LoginActivity.ActivityA.finish();

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.transition.Explode;
@@ -43,12 +42,12 @@ public class LoginActivity extends AppCompatActivity {
         Bmob.initialize(this,"45d7101aad311642fdffbc8ad09412c4");
         BmobUser bmobUser = BmobUser.getCurrentUser();
         if(bmobUser != null){
-            startActivity(new Intent(this, LoginSuccessActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         }
         super.onCreate(savedInstanceState);
         ActivityA=this;
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
 
     }
@@ -73,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                 explode.setDuration(500);
                 getWindow().setExitTransition(explode);
                 getWindow().setEnterTransition(explode);
-                ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+//                ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
 
 
                 BmobUser bu2 = new BmobUser();
@@ -85,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void done(BmobUser bmobUser, BmobException e) {
                         if(e==null){
                             Toast.makeText(LoginActivity.this,"登陆成功",Toast.LENGTH_LONG).show();
-                            Intent i2 = new Intent(LoginActivity.this,LoginSuccessActivity.class);
+                            Intent i2 = new Intent(LoginActivity.this,MainActivity.class);
                             startActivity(i2);
                             finish();
                         }else{
