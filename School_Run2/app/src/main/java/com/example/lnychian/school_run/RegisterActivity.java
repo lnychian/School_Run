@@ -12,6 +12,7 @@ import android.support.v7.widget.CardView;
 import android.transition.Explode;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateInterpolator;
@@ -21,11 +22,14 @@ import android.widget.Toast;
 
 import com.example.lnychian.school_run.Data.MyUser;
 
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import cn.bmob.v3.BmobSMS;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -36,10 +40,18 @@ public class RegisterActivity extends AppCompatActivity {
     CardView cvAdd;
     @InjectView(R.id.bt_nest)
     Button btNest;
+    @InjectView(R.id.cd_btn)
+    Button btCd;
     @InjectView(R.id.et_username)
     EditText etUsername;
     @InjectView(R.id.et_password)
     EditText etPassword;
+    @InjectView(R.id.et_repeatpassword)
+    EditText etRepeatpasswordpassword;
+    @InjectView(R.id.et_phone)
+    EditText etPhone;
+    @InjectView(R.id.et_Code)
+    EditText etCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +70,10 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
-    @OnClick({R.id.bt_nest})
+    @OnClick({R.id.cd_btn,R.id.bt_nest})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.bt_nest:
-                btNest.setEnabled(false);
+            case R.id.cd_btn:
                 Explode explode = new Explode();
                 explode.setDuration(500);
                 getWindow().setExitTransition(explode);
@@ -71,24 +82,75 @@ public class RegisterActivity extends AppCompatActivity {
                 BmobUser bu = new BmobUser();
                 bu.setUsername(etUsername.getText().toString());
                 bu.setPassword(etPassword.getText().toString());
-                bu.signUp(new SaveListener<MyUser>() {
+                bu.setMobilePhoneNumber(etPhone.getText().toString());//设置手机号码（必填）
+                if (etUsername.getText().toString().equals(""))
+                {
+                    Toast.makeText(RegisterActivity.this,"请输入用户名",Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    if(etPassword.getText().toString().equals(""))
+                    {
+                        Toast.makeText(RegisterActivity.this,"密码为空",Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        if (etPhone.getText().toString().equals(""))
+                        {
+                            Toast.makeText(RegisterActivity.this,"请输入手机号",Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+                            if(etPassword.getText().toString().equals(etRepeatpasswordpassword.getText().toString()))
+                            {
+                                BmobSMS.requestSMSCode(etPhone.getText().toString(),"JustRun", new QueryListener<Integer>() {
+
+                                    @Override
+                                    public void done(Integer smsId,BmobException ex) {
+                                        if(ex==null){//验证码发送成功
+                                            Log.i("smile", "短信id："+smsId);//用于查询本次短信发送详情
+                                        }
+                                    }
+                                });
+                            }
+                            else
+                            {
+                                Toast.makeText(RegisterActivity.this,"密码不相同",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }
+                }
+                break;
+            case R.id.bt_nest:
+                BmobUser bu1 = new BmobUser();
+                bu1.setUsername(etUsername.getText().toString());
+                bu1.setPassword(etPassword.getText().toString());
+                bu1.setMobilePhoneNumber(etPhone.getText().toString());
+                bu1.signOrLogin(etCode.getText().toString(), new SaveListener<MyUser>() {
                     @Override
-                    public void done(MyUser s, BmobException e) {
+                    public void done(MyUser user,BmobException e) {
                         if(e==null){
+                            Toast.makeText(RegisterActivity.this,"注册或登录成功",Toast.LENGTH_LONG).show();
                             Intent i2 = new Intent(RegisterActivity.this,MainActivity.class);
                             startActivity(i2);
                             finish();
-                            LoginActivity.ActivityA.finish();
                         }else{
-                            if (e.getErrorCode()==202){
+                            Toast.makeText(RegisterActivity.this,"失败:" + e.getMessage(),Toast.LENGTH_LONG).show();
+                            if(e.getErrorCode()==202)
+                            {
                                 Toast.makeText(RegisterActivity.this,"用户名已存在",Toast.LENGTH_LONG).show();
-                                btNest.setEnabled(true);
                             }
-
+                            if(e.getErrorCode()==207)
+                            {
+                                Toast.makeText(RegisterActivity.this,"验证码错误",Toast.LENGTH_LONG).show();
+                            }
+                            if(e.getErrorCode()==209)
+                            {
+                                Toast.makeText(RegisterActivity.this,"手机号已被注册",Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
                 });
-
                 break;
         }
     }

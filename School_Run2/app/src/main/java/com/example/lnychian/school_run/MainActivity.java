@@ -1,8 +1,11 @@
 package com.example.lnychian.school_run;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.transition.Explode;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,15 +14,20 @@ import com.ycl.tabview.library.TabView;
 import com.ycl.tabview.library.TabViewChild;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import cn.bmob.v3.BmobUser;
 
 
 public class MainActivity extends AppCompatActivity {
     TabView tabView;
+    Button exit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tabView= (TabView) findViewById(R.id.tabView);
+        exit = (Button) findViewById(R.id.Exit);
         Explode explode = new Explode();
         explode.setDuration(500);
         getWindow().setExitTransition(explode);
@@ -39,7 +47,39 @@ public class MainActivity extends AppCompatActivity {
         tabView.setOnTabChildClickListener(new TabView.OnTabChildClickListener() {
             @Override
             public void onTabChildClick(int  position, ImageView currentImageIcon, TextView currentTextView) {
-//                Toast.makeText(getApplicationContext(),"position:"+position,Toast.LENGTH_SHORT).show();
+                switch (position)
+                {
+                    case 0:
+                    {
+                        exit.setVisibility(View.GONE);
+                        break;
+                    }
+                    case 1:
+                    {
+                        exit.setVisibility(View.GONE);
+                        break;
+                    }
+                    case 2:
+                    {
+                        exit.setVisibility(View.GONE);
+                        break;
+                    }
+                    case 3:
+                    {
+                        exit.setVisibility(View.VISIBLE);
+                        break;
+                    }
+                }
+            }
+        });
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BmobUser.logOut();   //清除缓存用户对象
+                Intent i = new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(i);
+                finish();
             }
         });
     }

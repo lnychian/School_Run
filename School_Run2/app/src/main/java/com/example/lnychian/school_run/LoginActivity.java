@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.bt_go, R.id.fab})
+    @OnClick({R.id.bt_go, R.id.fab,R.id.forgetpw})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fab:
@@ -72,9 +72,6 @@ public class LoginActivity extends AppCompatActivity {
                 explode.setDuration(500);
                 getWindow().setExitTransition(explode);
                 getWindow().setEnterTransition(explode);
-//                ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
-
-
                 BmobUser bu2 = new BmobUser();
                 bu2.setUsername(etUsername.getText().toString());
                 bu2.setPassword(etPassword.getText().toString());
@@ -94,6 +91,9 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+                break;
+            case R.id.forgetpw:
+
                 break;
         }
     }

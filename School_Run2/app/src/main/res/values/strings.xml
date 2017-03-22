@@ -3,12 +3,15 @@
     <string name="login_success">正在登录</string>
     <string name="title">LOGIN</string>
     <string name="Username">用户名</string>
+    <string name="Phone">手机号</string>
+    <string name="Code">验证码</string>
     <string name="Password">密码</string>
     <string name="forgot_your_password">忘记密码</string>
     <string name="login">Go</string>
     <string name="repeat_password">重复密码</string>
-    <string name="next">NEXT</string>
+    <string name="next">下一步</string>
     <string name="register">REGISTER</string>
+    <string name="exit">Exit</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

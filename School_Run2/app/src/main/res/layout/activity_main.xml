@@ -8,10 +8,24 @@
     tools:context="com.example.lnychian.school_run.MainActivity">
 
 
+
     <com.ycl.tabview.library.TabView
         android:id="@+id/tabView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <Button
+            android:visibility="gone"
+            android:id="@+id/Exit"
+            android:background="@drawable/bt_shape"
+            android:stateListAnimator="@drawable/state_list_animator_z"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="@string/exit"
+            android:textColor="#d3d3d3"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="217dp">
+        </Button>
     </com.ycl.tabview.library.TabView>
 
 </LinearLayout>
