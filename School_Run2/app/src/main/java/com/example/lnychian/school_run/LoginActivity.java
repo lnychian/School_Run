@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Bmob.initialize(this,"45d7101aad311642fdffbc8ad09412c4");
+//        SDKInitializer.initialize(getApplicationContext());
         BmobUser bmobUser = BmobUser.getCurrentUser();
         if(bmobUser != null){
             startActivity(new Intent(this, MainActivity.class));
