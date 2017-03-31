@@ -10,13 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.amap.api.maps.AMap;
-import com.amap.api.maps.MapView;
-import com.example.lnychian.school_run.LoginActivity;
-import com.example.lnychian.school_run.MainActivity;
 import com.example.lnychian.school_run.R;
 
-import cn.bmob.v3.BmobUser;
 
 public class FragmentFour extends Fragment {
     TextView textView;
@@ -31,7 +26,7 @@ public class FragmentFour extends Fragment {
     @Nullable @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_one,container,false);
+        View view=inflater.inflate(R.layout.fragment_four,container,false);
         textView= (TextView) view.findViewById(R.id.textView);
         textView.setText(getArguments().getString("text"));
         exit = (Button) view.findViewById(R.id.Exit);

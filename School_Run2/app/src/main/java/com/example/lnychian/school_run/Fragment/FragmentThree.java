@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.amap.api.maps.AMap;
-import com.amap.api.maps.MapView;
 import com.example.lnychian.school_run.R;
 
 public class FragmentThree extends Fragment {
@@ -24,7 +22,7 @@ public class FragmentThree extends Fragment {
     @Nullable @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_one,container,false);
+        View view=inflater.inflate(R.layout.fragment_three,container,false);
         textView= (TextView) view.findViewById(R.id.textView);
         textView.setText(getArguments().getString("text"));
 

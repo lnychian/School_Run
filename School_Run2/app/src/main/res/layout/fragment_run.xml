@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:weightSum="1">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textColor="#333333"
+        android:textStyle="bold"
+        android:text="TEXT" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/time"
+                android:id="@+id/time"
+                android:layout_weight="1" />
+
+            <TextView
+                android:text="定时"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:id="@+id/bytime"
+                android:layout_weight="5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/distance"
+                android:id="@+id/distance"
+                android:layout_weight="1" />
+
+            <TextView
+                android:text="距离"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/bydistance"
+                android:layout_weight="5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/free"
+                android:id="@+id/free"
+                android:layout_weight="1" />
+
+            <TextView
+                android:text="自由"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/byfree"
+                android:layout_weight="5" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
